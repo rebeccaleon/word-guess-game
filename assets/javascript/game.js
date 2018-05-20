@@ -1,20 +1,36 @@
 //GLOBAL VARIABLES
 var wordList = [
-"Alien",
-"Halloween",
-"Psycho",
-"Scream"
+    "ALIEN",
+    "HALLOWEEN",
+    "PSYCHO",
+    "SCREAM"
 ];
 
-var word= "";
+var word = "";
 var wins = 0;
 var guessesLeft = 30;
 var guessedLetters = [];
 var gameStart = false;
 var guessArray = [];
 
+var word = wordList[Math.floor(Math.random() * wordList.length)];
+
+for (var i = 0; i < word.length; i++) {
+guessArray.push("_ ");
+}
+
+var blankSpaces = guessArray.length;
+
+var remainingLetters = word.length;
 
 //FUNCTIONS
+function reset(){
+    var guessesLeft = 30;
+    var guessedLetters = [];
+    var guessArray = [];
+}
+
+
 function generateIndexes(array, letter) {
     var indexes = [];
     var i = -1;
@@ -34,19 +50,6 @@ function removeDuplicates(array){
     return guessedLetters;
 }
 
-//Pick word randomly
-var randomNumber = Math.floor(Math.random () * wordList.length);
-var word = wordList [randomNumber];
-var docUnderscore = document.getElementById("underscores");
-for (var i = 0; i < word.length; i++) {
- guessArray[i] = "_ ";
- docUnderscore.innerHTML = guessArray.join("");
-}
-var remainingLetters = word.length;
-var blankSpaces = guessArray.length;
-var remainingLetters = word.length;
-
-console.log(word);
 
 //START THE GAME//
 document.onkeyup = function gameStart(){
@@ -69,7 +72,7 @@ document.onkeyup = function gameStart(){
         }
 
         document.getElementById("underscores").textContent = guessArray.join("");
-        document.getElementById("guesses-remaining").textContent = guessesLeft;    
+        document.getElementById("guesses-remaining").textContent = guessesLeft;
 
         guessedLetters.push(userGuess);
 
@@ -82,34 +85,18 @@ document.onkeyup = function gameStart(){
         }
         else {
             alert("BOO! YOU LOSE!");
-        
-    
-        }  
-    }
+            
+        }  reset();
 
-    if (blankSpaces == 0){
-        gameStart();
+
+
+    if (blankSpaces === 0){
         wins++;
-        document.getElementById("wins").innerHTML = wins;
+        document.getElementById("wins").innerHTML = wins; 
         
-    }
+    } reset();
     
 
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
